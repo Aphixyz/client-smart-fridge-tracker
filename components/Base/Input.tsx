@@ -1,0 +1,64 @@
+import React, { forwardRef } from 'react';
+
+type BaseInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: string;
+  error?: string;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  containerClassName?: string;
+};
+
+const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(function BaseInput(
+  {
+    label,
+    error,
+    leftIcon,
+    rightIcon,
+    className = '',
+    containerClassName = '',
+    id,
+    ...props
+  },
+  ref
+) {
+  const inputClassName = [
+    'w-full rounded-lg border bg-slate-50 py-2 text-sm text-slate-700 transition-all',
+    'focus:outline-none focus:ring-1 focus:ring-blue-500',
+    leftIcon ? 'pl-10' : 'pl-4',
+    rightIcon ? 'pr-10' : 'pr-4',
+    error ? 'border-rose-300 focus:ring-rose-500' : 'border-slate-200',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <div className={`space-y-1 ${containerClassName}`.trim()}>
+      {label && (
+        <label htmlFor={id} className="block text-sm font-medium text-slate-600">
+          {label}
+        </label>
+      )}
+
+      <div className="relative">
+        {leftIcon && (
+          <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-400">
+            {leftIcon}
+          </span>
+        )}
+
+        <input ref={ref} id={id} className={inputClassName} {...props} />
+
+        {rightIcon && (
+          <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-400">
+            {rightIcon}
+          </span>
+        )}
+      </div>
+
+      {error && <p className="text-xs text-rose-500">{error}</p>}
+    </div>
+  );
+});
+
+export default BaseInput;
