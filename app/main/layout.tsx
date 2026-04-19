@@ -1,5 +1,4 @@
 import "toastify-js/src/toastify.css";
-import "./globals.css";
 
 import { Kanit } from "next/font/google";
 import { MenuItem } from "@/types/layout/sidebar";
@@ -38,7 +37,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${kanit.variable} min-h-screen bg-slate-50 flex`}>
-        {children}
+        {/* Sidebar */}
+        <Sidebar menuItems={myMenu} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col lg:ml-64 min-h-screen w-full overflow-hidden">
+          {/* Top Navigation */}
+          <Navbar />
+
+          {/* Dynamic Content */}
+          <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-6">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
