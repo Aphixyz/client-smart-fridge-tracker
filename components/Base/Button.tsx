@@ -26,6 +26,8 @@ const BaseButton = ({
         outline: "border border-slate-300 text-slate-700 hover:bg-slate-50 focus:ring-slate-200",
         ghost: "bg-transparent text-slate-600 hover:bg-slate-100",
         link: "bg-transparent text-blue-600 hover:underline px-0 py-0 h-auto shadow-none",
+        emral:"bg-[#2ECC71] text-white shadow-sm focus:ring-[#2ECC71]",
+        cancel:"bg-[#CDEAFF] text-black shadow-sm focus:ring-[#2ECC71]"
     };
 
     // 3. Sizes
