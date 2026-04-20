@@ -1,49 +1,32 @@
 "use client"
+
+import { useEffect } from 'react'
+import Image from 'next/image'
 import BaseCard from '@/components/Base/Card'
 import BaseLoading from '@/components/Base/Loading'
-import { Fridge, ApiResponse } from '@/types/fridge/responce'
-import React, { useEffect, useState } from 'react'
+import { useFridge } from '@/hook/firdge/useFridge'
+import type { Fridge } from '@/types/fridge/responce'
 
 export default function FridgePage() {
-    const [fridges, setFridges] = useState<Fridge[]>([])
-    const [loading, setLoading] = useState(true)
+   const { fridges, loading, refetch } = useFridge()
 
-    useEffect(() => {
-        const fetchFridges = async () => {
-            try {
-                const response = await fetch('http://localhost:3001/api/v1/fridges')
-                const result: ApiResponse = await response.json()
-                if (result.success) {
-                    setFridges(result.data)
-                }
-            } catch (error) {
-                console.error('โหลดข้อมูลตู้เย็นไม่สำเร็จ:', error)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchFridges()
-    }, [])
-
-    if (loading) {
-        return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3].map((i) => (
-                    <BaseCard key={i}>
-                        <BaseLoading type="card" />
-                    </BaseCard>
-                ))}
-            </div>
-        )
-    }
-
+   
+   if (loading) {
+       return (
+           <div className="flex justify-center items-center min-h-[50vh]">
+               <BaseLoading type='card'/> 
+           </div>
+       )
+   }
+   if (fridges.length === 0) {
+       return <div className="text-center text-slate-500 font-kanit mt-10">ยังไม่มีข้อมูลตู้เย็น</div>
+   }
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
-            {fridges.map((fridge) => (
-                <BaseCard key={fridge.fridge_id} className="flex flex-col items-center p-6">
+            {Array.isArray(fridges) && fridges.map((fridge:Fridge) => (
+                <BaseCard key={fridge.fridge_id} className="flex flex-col items-center p-6 border shadow-lg">
                     
-                    <img src="/fridge.png" alt="Fridge" className="mb-6 w-60px h-77px" />
+                    <Image src="/fridge.png" alt="Fridge" width={200} height={200} className="mb-6 w-full" />
 
                     <div className="space-y-2 text-center">
 

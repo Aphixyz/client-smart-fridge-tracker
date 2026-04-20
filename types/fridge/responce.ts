@@ -7,10 +7,10 @@ interface Fridge {
   total_categories: string
 }
 
-interface ApiResponse {
+interface FridgeResponse {
   success: boolean
   message: string
   data: Fridge[]
 }
 
-export type { Fridge, ApiResponse }
+export type { Fridge, FridgeResponse }
