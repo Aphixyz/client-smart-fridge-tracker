@@ -6,4 +6,5 @@ export const fridgeService = {
     const response = await apiClient.get("/fridges");
     return response.data.data;
   },
+
 };
