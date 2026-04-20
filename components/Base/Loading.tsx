@@ -27,12 +27,12 @@ const BaseLoading = ({ type = 'spinner', rows = 5, text }: BaseLoadingProps) => 
     // 2. แบบ Skeleton Card
     if (type === 'card') {
         return (
-            <div className="w-full rounded-2xl border border-slate-100 p-6 space-y-4 animate-pulse">
-                <div className="h-4 w-1/3 rounded-full bg-slate-50" />
-                <div className="h-32 w-full rounded-2xl bg-slate-50" />
+            <div className="w-full rounded-2xl border shadow-lg border-slate-100 p-6 space-y-4 animate-pulse">
+                <div className="h-4 w-1/3 rounded-full bg-slate-200" />
+                <div className="h-32 w-full rounded-2xl bg-slate-200" />
                 <div className="space-y-2">
-                    <div className="h-3 w-full rounded-full bg-slate-50" />
-                    <div className="h-3 w-2/3 rounded-full bg-slate-50" />
+                    <div className="h-3 w-full rounded-full bg-slate-200" />
+                    <div className="h-3 w-2/3 rounded-full bg-slate-200" />
                 </div>
             </div>
         );
