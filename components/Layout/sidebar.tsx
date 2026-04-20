@@ -1,15 +1,24 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { ChevronDown, Home, Menu, Settings, Users, X, LayoutDashboard } from 'lucide-react';
-import { MenuIcon, SidebarProps } from '@/types/layout/sidebar';
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ChevronDown,
+  Home,
+  Menu,
+  Settings,
+  Users,
+  X,
+  LayoutDashboard,
+} from "lucide-react";
+import { MenuIcon, SidebarProps } from "@/types/layout/sidebar";
 
 const iconMap: Record<MenuIcon, React.ComponentType<{ size?: number }>> = {
   home: Home,
   users: Users,
   settings: Settings,
-  LayoutDashboard: LayoutDashboard
+  LayoutDashboard: LayoutDashboard,
 };
 
 function Sidebar({ menuItems }: SidebarProps) {
@@ -25,7 +34,7 @@ function Sidebar({ menuItems }: SidebarProps) {
       {/* Mobile Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className="fixed top-4 left-4 z-[60] p-2 bg-slate-800 text-white rounded-md lg:hidden"
+        className="fixed top-4 left-4 z-[60] p-2 bg-white text-white rounded-md lg:hidden"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -39,14 +48,23 @@ function Sidebar({ menuItems }: SidebarProps) {
       )}
 
       {/* Sidebar Panel */}
-      <aside className={`
-        fixed top-0 left-0 z-[50] h-screen bg-slate-900 text-slate-100 transition-transform duration-300 ease-in-out
+      <aside
+        className={`
+        fixed top-0 left-0 z-[50] h-screen bg-[#2ECC71] text-slate-100 transition-transform duration-300 ease-in-out
         w-64 border-r border-slate-700
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} 
         lg:translate-x-0
-      `}>
-        <div className="p-6">
-          <h2 className="text-2xl font-kanit font-bold text-white">THOD DEV LIB</h2>
+      `}
+      >
+        <div className="p-3 ">
+          <Image
+            src="/icons/sidebar.png"
+            alt="Logo"
+            width={250}
+            height={250}
+            className="h-[80px] w-[250px] object-contain"
+            priority
+          />
         </div>
 
         <nav className="mt-4 px-4 space-y-2 font-kanit">
@@ -61,26 +79,26 @@ function Sidebar({ menuItems }: SidebarProps) {
                     onClick={() => toggleSubMenu(item.title)}
                     aria-expanded={openSubMenu === item.title}
                     aria-controls={`submenu-${item.title}`}
-                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-800 transition-colors group text-left"
+                    className="w-full flex items-center justify-between p-3 rounded-lg bg-white text-black transition-colors group text-left"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-slate-400 group-hover:text-white">
+                      <span className="text-black">
                         {Icon ? <Icon size={20} /> : null}
                       </span>
                       <span>{item.title}</span>
                     </div>
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-200 ${openSubMenu === item.title ? 'rotate-180' : ''}`}
+                      className={`transition-transform duration-200 ${openSubMenu === item.title ? "rotate-180" : ""}`}
                     />
                   </button>
                 ) : (
                   <Link
-                    href={item.href ?? '#'}
-                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-800 transition-colors group text-left"
+                    href={item.href ?? "#"}
+                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-white hover:text-black transition-colors group text-left"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-slate-400 group-hover:text-white">
+                      <span className="text-white group-hover:text-black transition-colors duration-300">
                         {Icon ? <Icon size={20} /> : null}
                       </span>
                       <span>{item.title}</span>
@@ -94,10 +112,10 @@ function Sidebar({ menuItems }: SidebarProps) {
                       <a
                         key={sub.title}
                         href={sub.href}
-                        className="relative group/sub flex items-center p-2 text-sm text-slate-400 hover:text-white transition-all rounded-md overflow-hidden"
+                        className="relative group/sub flex items-center p-2 text-sm text-white transition-all rounded-md overflow-hidden"
                       >
                         {/* Dot Indicator: จุดเล็กๆ หน้าเมนูย่อย */}
-                        <span className="absolute left-[-17px] w-1.5 h-1.5 rounded-full bg-slate-700 group-hover/sub:bg-blue-400 transition-colors" />
+                        <span className="absolute left-[-17px] w-1.5 h-1.5 rounded-full bg-white group-hover/sub:bg-blue-400 transition-colors" />
 
                         <span className="font-kanit font-light group-hover/sub:translate-x-1 transition-transform">
                           {sub.title}

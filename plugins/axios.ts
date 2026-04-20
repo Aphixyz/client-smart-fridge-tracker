@@ -42,7 +42,7 @@ const handleError = (error: any) => {
         message = "เซสชั่นหมดอายุ กรุณาเข้าสู่ระบบใหม่";
         if (typeof window !== "undefined") {
           AuthToken.clear();
-          window.location.href = "/login";
+          window.location.href = "/auth/login";
         }
         break;
       case 403:

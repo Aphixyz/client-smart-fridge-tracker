@@ -1,20 +1,23 @@
 "use client";
 
-import React, { useState } from 'react';
-import { LogOut, User, Bell, Search, Settings, ChevronDown } from 'lucide-react';
-import { useClickOutside } from '@/hook/useClickOutside';
-
+import React, { useState } from "react";
+import {
+    LogOut,
+    User,
+    Bell,
+    Search,
+    Settings,
+    ChevronDown,
+} from "lucide-react";
+import { useClickOutside } from "@/hook/useClickOutside";
+import { AuthService } from "@/service/Auth/authService";
 export default function Navbar() {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     // ปิด dropdown เมื่อคลิกข้างนอก
-    const dropdownRef = useClickOutside<HTMLDivElement>(() => setIsProfileOpen(false));
-
-    const handleLogout = () => {
-        // จัดการ logic logout ตรงนี้
-        console.log("Logout clicked");
-        window.location.href = "/login";
-    };
+    const dropdownRef = useClickOutside<HTMLDivElement>(() =>
+        setIsProfileOpen(false),
+    );
 
     return (
         <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-end border-b border-slate-200 bg-white/80 px-6 backdrop-blur-md font-kanit">
@@ -37,17 +40,26 @@ export default function Navbar() {
                             <User size={18} />
                         </div>
                         <div className="hidden lg:flex flex-col items-start leading-none ml-1">
-                            <span className="text-sm font-bold text-slate-700">Administrator</span>
-                            <span className="text-[10px] text-slate-400 mt-0.5">Super Admin</span>
+                            <span className="text-sm font-bold text-slate-700">
+                                Administrator
+                            </span>
+                            <span className="text-[10px] text-slate-400 mt-0.5">
+                                Super Admin
+                            </span>
                         </div>
-                        <ChevronDown size={14} className={`text-slate-400 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown
+                            size={14}
+                            className={`text-slate-400 transition-transform ${isProfileOpen ? "rotate-180" : ""}`}
+                        />
                     </button>
 
                     {/* Dropdown Menu */}
                     {isProfileOpen && (
                         <div className="absolute right-0 mt-3 w-56 rounded-2xl border border-slate-100 bg-white p-2 shadow-sm animate-in fade-in zoom-in-95 duration-200">
                             <div className="px-3 py-2 border-b border-slate-50 mb-1 lg:hidden">
-                                <p className="text-sm font-bold text-slate-700">Administrator</p>
+                                <p className="text-sm font-bold text-slate-700">
+                                    Administrator
+                                </p>
                                 <p className="text-xs text-slate-400">Super Admin</p>
                             </div>
 
@@ -63,7 +75,7 @@ export default function Navbar() {
                             <div className="my-1 h-px bg-slate-50" />
 
                             <button
-                                onClick={handleLogout}
+                                onClick={() => AuthService.logout()}
                                 className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm text-rose-600 hover:bg-rose-50 transition-colors"
                             >
                                 <LogOut size={16} />

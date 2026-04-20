@@ -69,11 +69,11 @@ export const useLogin = () => {
       setData(response);
       setForm(initialForm);
 
-      showToast(response.message || "เข้าสู่ระบบสำเร็จ", "success");
+      showToast("เข้าสู่ระบบสำเร็จ", "success");
 
       // เก็บ user ถ้าต้องการ
       if (typeof window !== "undefined") {
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("user", JSON.stringify(response.data?.user));
       }
 
       router.push("/main");
