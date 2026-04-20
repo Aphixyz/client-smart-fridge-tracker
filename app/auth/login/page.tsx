@@ -53,7 +53,6 @@ function Page() {
             shape="rounded"
             variant="emral"
             disabled={loading}
-            
             className="w-full md:w-8/12 gap-2"
           >
             {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}

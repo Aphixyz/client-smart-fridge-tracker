@@ -5,6 +5,6 @@ import type { RegisterResponse } from "@/types/user/response";
 export const registerService = {
   async createUser(payload: RegisterFormData): Promise<RegisterResponse> {
     const response = await apiClient.post("/register", payload);
-    return response.data;
+    return response.data ?? [];
   },
 };

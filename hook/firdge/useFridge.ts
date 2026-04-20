@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect,useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Fridge } from "@/types/fridge/responce";
 import { fridgeService } from "@/service/fridge/fridgeService";
@@ -12,7 +12,7 @@ export const useFridge = () => {
 
   const fetchFridges = useCallback(async () => {
     try {
-      setLoading(true); 
+      setLoading(true);
       const response = await fridgeService.getFridges();
       setFridges(response || []);
     } catch (error) {
@@ -23,11 +23,11 @@ export const useFridge = () => {
   }, []);
 
   useEffect(() => {
-       fetchFridges()
-   }, [fetchFridges])
+    fetchFridges();
+  }, [fetchFridges]);
   return {
     fridges,
     loading,
-    refetch: fetchFridges
+    refetch: fetchFridges,
   };
 };
