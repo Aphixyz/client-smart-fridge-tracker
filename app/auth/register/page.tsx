@@ -14,7 +14,7 @@ function Page() {
     <div className="mx-auto font-kanit w-full max-w-md">
       <div className="mb-6 flex flex-col items-center justify-center object-cover">
         <Image
-          src="/icons/image.png"
+          src="/icons/head.png"
           alt="Logo"
           width={250}
           height={250}
@@ -70,7 +70,7 @@ function Page() {
             disabled={loading}
             className="w-full md:w-9/12"
           >
-            {loading ? "กำลังสมัครใช้งาน..." : "บันทึก"}
+            {loading ? "กำลังสมัครใช้งาน..." : "สมัครใช้งาน"}
           </BaseButton>
 
           <BaseButton
@@ -79,7 +79,7 @@ function Page() {
             variant="cancel"
             disabled={loading}
             className="w-full md:w-3/12"
-            onClick={() => router.push("/auth/login")}
+            onClick={() => router.back()}
           >
             ยกเลิก
           </BaseButton>

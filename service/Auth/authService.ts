@@ -24,6 +24,11 @@ export const AuthService = {
     return response.data;
   },
 
+  logout: async () => {
+    AuthToken.clear();
+    window.location.href = "/auth/login";
+  },
+
   isAuthenticated: (): boolean => {
     return !!AuthToken.get();
   },

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import type { RegisterFormData } from "@/types/user/request";
 import type { RegisterResponse } from "@/types/user/response";
@@ -18,6 +19,7 @@ const initialForm: RegisterFormData = {
 };
 
 export const useRegister = () => {
+  const router = useRouter();
   const [form, setForm] = useState<RegisterFormData>(initialForm);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<RegisterFormErrors>({});
@@ -67,6 +69,7 @@ export const useRegister = () => {
       setData(response);
       setForm(initialForm);
       showToast("สมัครสมาชิกสำเร็จ", "success");
+      router.push("/auth/login");
     } catch (err) {
       let message = "เกิดข้อผิดพลาดจากเครือข่าย";
 

@@ -15,7 +15,7 @@ function Page() {
     <div className="mx-auto font-kanit w-full max-w-md">
       <div className="mb-6 flex flex-col items-center justify-center object-cover">
         <Image
-          src="/icons/image.png"
+          src="/icons/head.png"
           alt="Logo"
           width={250}
           height={250}
@@ -53,6 +53,7 @@ function Page() {
             shape="rounded"
             variant="emral"
             disabled={loading}
+            
             className="w-full md:w-8/12 gap-2"
           >
             {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}

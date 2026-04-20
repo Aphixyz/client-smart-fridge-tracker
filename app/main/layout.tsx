@@ -3,6 +3,7 @@ import "toastify-js/src/toastify.css";
 import { Kanit } from "next/font/google";
 import { MenuItem } from "@/types/layout/sidebar";
 import Sidebar from "@/components/Layout/sidebar";
+import Navbar from "@/components/Layout/navbar";
 
 const kanit = Kanit({
   subsets: ["latin", "thai"],
@@ -11,15 +12,15 @@ const kanit = Kanit({
 });
 
 const myMenu: MenuItem[] = [
-  { title: "Dashboard", icon: "home", href: "/" },
-  {
-    title: "Management",
-    icon: "users",
-    subMenu: [
-      { title: "User List", href: "/users" },
-      { title: "Permissions", href: "/permissions" },
-    ],
-  },
+  { title: "รายการตู้เย็น", icon: "home", href: "/main/fridge" },
+  // {
+  //   title: "Management",
+  //   icon: "users",
+  //   subMenu: [
+  //     { title: "User List", href: "/users" },
+  //     { title: "Permissions", href: "/permissions" },
+  //   ],
+  // },
   {
     title: "Board Lib components",
     icon: "LayoutDashboard",
@@ -27,30 +28,26 @@ const myMenu: MenuItem[] = [
   },
 ];
 
-import Navbar from "@/components/Layout/navbar";
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${kanit.variable} min-h-screen bg-slate-50 flex`}>
-        {/* Sidebar */}
-        <Sidebar menuItems={myMenu} />
+    <div className={`${kanit.variable} min-h-screen w-full `}>
+      <Sidebar menuItems={myMenu} />
 
-        {/* Main Content Area */}
-        <div className="flex flex-1 flex-col lg:ml-64 min-h-screen w-full overflow-hidden">
-          {/* Top Navigation */}
-          <Navbar />
+      <div className="min-h-screen lg:pl-64">
+        <div className="flex min-h-screen flex-col ">
+          <div className="w-full">
+            <Navbar />
+          </div>
 
-          {/* Dynamic Content */}
           <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-6">
             {children}
           </main>
         </div>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }
