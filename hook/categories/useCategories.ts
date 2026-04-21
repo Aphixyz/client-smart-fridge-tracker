@@ -9,6 +9,7 @@ export const useCategories = () => {
   const [categories, setCategories] = useState<CategoriesRespones[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<boolean>(false);
 
   const fetchCategories = useCallback(async () => {
     setLoading(true);
@@ -26,6 +27,19 @@ export const useCategories = () => {
     }
   }, []);
 
+  const ConfirmDelete = async (id: number) => {
+    try {
+      setDeleting(true);
+      await categoriesService.deleteCategory(id);
+      showToast("ลบข้อมูลสำเร็จ", "success");
+      await fetchCategories();
+    } catch (error) {
+      showToast("ลบข้อมูลไม่สำเร็จ", "error");
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
@@ -35,5 +49,7 @@ export const useCategories = () => {
     loading,
     categories,
     error,
+    ConfirmDelete,
+    deleting
   };
 };
