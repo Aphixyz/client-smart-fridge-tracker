@@ -31,4 +31,13 @@ interface FridgeProductResponse {
   data: FridgeProduct[]
 }
 
-export type { Fridge, FridgeResponse, FridgeProduct, FridgeProductResponse }
+interface FormProudct {
+  name: string
+  category_id: number
+  quantity: number
+  unit: string
+  expiry_date: string
+}
+
+
+export type { Fridge, FridgeResponse, FridgeProduct, FridgeProductResponse, FormProudct }

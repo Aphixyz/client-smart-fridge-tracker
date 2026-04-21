@@ -22,4 +22,10 @@ export const fridgeProductService = {
   async deleteProductFromFridge(fridgeId: number, productId: number): Promise<void> {
     await apiClient.delete(`/fridges/${fridgeId}/products/${productId}`);
   },
+
+  async insertProductToFridge(fridgeId: number, payload: any): Promise<any> {
+    const response = await apiClient.post(`/fridges/${fridgeId}/products`, payload);
+    return response.data;
+  }
 };
+
