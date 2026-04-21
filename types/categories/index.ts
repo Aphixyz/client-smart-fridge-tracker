@@ -1,7 +1,7 @@
 interface Categories {
     id: number
-    name: String
-    icon: String
+    name: string
+    icon: string
 }
 
 interface CategoriesRespones {

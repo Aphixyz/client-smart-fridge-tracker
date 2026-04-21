@@ -32,8 +32,8 @@ interface FridgeProductResponse {
 }
 
 interface FormProudct {
-  name: string
   category_id: number
+  name: string
   quantity: number
   unit: string
   expiry_date: string

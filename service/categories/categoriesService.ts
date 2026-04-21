@@ -2,9 +2,8 @@ import apiClient from "@/plugins/axios";
 import { Categories, CategoriesRespones } from "@/types/categories/index";
 
 export const categoriesService = {
-  async getCategories(): Promise<CategoriesRespones[]> {
+  async getCategories(): Promise<Categories[]> {
     const response = await apiClient.get("/categories");
-    console.log(response.data);
     return response.data.data ?? [];
   },
 

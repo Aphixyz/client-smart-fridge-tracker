@@ -6,7 +6,7 @@ import { Categories, CategoriesRespones } from "@/types/categories";
 import { showToast } from "@/lib/toast";
 
 export const useCategories = () => {
-  const [categories, setCategories] = useState<CategoriesRespones[]>([]);
+  const [categories, setCategories] = useState<Categories[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
