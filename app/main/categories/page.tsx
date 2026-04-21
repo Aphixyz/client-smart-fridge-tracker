@@ -10,12 +10,18 @@ import { Categories } from "@/types/categories";
 import { Column } from "@/types/table";
 import Image from "next/image";
 import { useState } from "react";
-import { showToast } from "@/lib/toast";
 import BaseConfirmModal from "@/components/Base/ConfirmModal";
+import BaseButton from "@/components/Base/Button";
 
 export default function Categoriespage() {
-  const { fetchCategories, categories, loading, deleting, ConfirmDelete } =
-    useCategories();
+  const {
+    fetchCategories,
+    categories,
+    loading,
+    deleting,
+    ConfirmDelete,
+    handleNavigate,
+  } = useCategories();
   const [showDelete, setShowDelete] = useState(false);
 
   const [selectCateId, setSelectCateId] = useState<number | null>(null);
@@ -79,7 +85,7 @@ export default function Categoriespage() {
             variant="outline"
             size="sm"
             leftIcon={<Pencil size={18} />}
-            onClick={() => console.log("Edit", item.id)}
+            onClick={() => handleNavigate(item.id)}
             className="p-2 h-auto border-slate-200 text-slate-600 hover:bg-slate-100"
             title="แก้ไข"
           />
@@ -99,7 +105,7 @@ export default function Categoriespage() {
 
   return (
     <div className="p-6">
-      <h1 className="mb-4 text-xl font-bold text-slate-800">หมวดหมู่สินค้า</h1>
+      <h1 className="mb-4 text-xl font-bold text-slate-800">หมวดหมู่และประเภทของในตู้เย็น</h1>
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
         <BaseTable
           data={categories}
@@ -122,6 +128,15 @@ export default function Categoriespage() {
         confirmText="ใช่, ลบเลย"
         cancelText="ไม่, ยกเลิก"
       />
+      <div className="flex justify-end mt-4">
+        <BaseButton
+          shape="full"
+          variant="primary"
+          onClick={handleNavigate}
+        >
+          เพิ่มข้อมูลใหม่
+        </BaseButton>
+      </div>
     </div>
   );
 }

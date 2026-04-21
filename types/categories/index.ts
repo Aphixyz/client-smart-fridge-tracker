@@ -1,13 +1,22 @@
-interface Categories {
-    id: number
-    name: String
-    icon: String
+export interface Category {
+  id: number;
+  name: string;
+  icon: string;
 }
 
-interface CategoriesRespones {
-    success: boolean
-    message: string
-    data: Categories[]
+export interface CategoryResponse {
+  success: boolean;
+  message: string;
+  data: Category;
 }
 
-export type { Categories,CategoriesRespones }
+export interface CategoriesResponse {
+  success: boolean;
+  message: string;
+  data: Category[];
+}
+
+export interface CategoryForm {
+  name: string;
+  icon: string;
+}
