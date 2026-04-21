@@ -7,7 +7,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     | "ghost"
     | "link"
     | "emral"
-    | "cancel";
+    | "cancel"
+    | "trash";
   size?: "sm" | "md" | "lg";
   shape?: "rounded" | "full" | "square";
   isLoading?: boolean;

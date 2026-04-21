@@ -59,7 +59,7 @@ function Modal({
         `}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+                {/* <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
                     <h3 className="text-lg font-bold text-slate-800">
                         {title || 'จัดการข้อมูล'}
                     </h3>
@@ -69,7 +69,7 @@ function Modal({
                     >
                         <X size={20} />
                     </button>
-                </div>
+                </div> */}
 
                 {/* Body (Scrollable) */}
                 <div className="flex-1 p-6 overflow-y-auto max-h-[70vh]">

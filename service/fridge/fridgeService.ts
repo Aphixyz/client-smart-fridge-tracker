@@ -14,8 +14,12 @@ export const fridgeProductService = {
     return response.data.data;
   },
 
-  async getFridgeProductsByFridgeId(fridgeId: string): Promise<FridgeProduct[]> {
+  async getFridgeProductsByFridgeId(fridgeId: number): Promise<FridgeProduct[]> {
     const response = await apiClient.get(`/fridges/${fridgeId}/products`);
     return response.data.data;
+  },
+
+  async deleteProductFromFridge(fridgeId: number, productId: number): Promise<void> {
+    await apiClient.delete(`/fridges/${fridgeId}/products/${productId}`);
   },
 };
