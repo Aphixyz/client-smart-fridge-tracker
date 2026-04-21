@@ -13,13 +13,21 @@ import { useState } from "react";
 import { showToast } from "@/lib/toast";
 import BaseConfirmModal from "@/components/Base/ConfirmModal";
 
-
 export default function Categoriespage() {
-  const { fetchCategories, categories, error, loading, ConfirmDelete } = useCategories();
+  const { fetchCategories, categories, loading, deleting, ConfirmDelete } =
+    useCategories();
   const [showDelete, setShowDelete] = useState(false);
 
-  const hanleDelete = async () => {
+  const [selectCateId, setSelectCateId] = useState<number | null>(null);
+
+  const hanleDelete = async (id: number) => {
+    setSelectCateId(id);
     setShowDelete(true);
+  };
+
+  const handleConfirmDeleted = async () => {
+    await ConfirmDelete(Number(selectCateId));
+    setShowDelete(false);
   };
 
   if (loading) {
@@ -39,7 +47,7 @@ export default function Categoriespage() {
           : "/icons/fridge.png";
         return (
           <div className="flex justify-center items-center w-full">
-            <div className="relative ml-2  w-19 h-10 overflow-hidden rounded-lg border-slate-100">
+            <div className="relative ml-2  w-20 h-10 overflow-hidden rounded-lg border-slate-100">
               <Image
                 src={imageUrl}
                 alt={item.name as string}
@@ -79,7 +87,7 @@ export default function Categoriespage() {
             variant="danger"
             size="sm"
             leftIcon={<Trash2 size={18} />}
-            onClick={() =>hanleDelete() }
+            onClick={() => hanleDelete(item.id)}
             className="h-auto border-slate-200 text-slate-600 hover:bg-red-100"
             title="ลบ"
           />
@@ -106,8 +114,8 @@ export default function Categoriespage() {
       <BaseConfirmModal
         isOpen={showDelete}
         onClose={() => setShowDelete(false)}
-        onConfirm={hanleDelete}
-        isLoading={loading}
+        onConfirm={handleConfirmDeleted}
+        isLoading={deleting}
         type="danger"
         title="คุณแน่ใจหรือไม่?"
         description="การลบข้อมูลนี้จะไม่สามารถเรียกคืนได้อีก คุณต้องการดำเนินการต่อใช่หรือไม่?"
