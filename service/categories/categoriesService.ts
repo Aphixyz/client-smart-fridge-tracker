@@ -1,22 +1,31 @@
 import apiClient from "@/plugins/axios";
-import { Categories, CategoriesRespones } from "@/types/categories/index";
+import {
+  CategoriesResponse,
+  CategoryForm,
+  Category,
+  CategoryResponse,
+} from "@/types/categories/index";
 
 export const categoriesService = {
-  async getCategories(): Promise<CategoriesRespones[]> {
-    const response = await apiClient.get("/categories");
-    console.log(response.data);
+  async getCategories(): Promise<Category[]> {
+    const response = await apiClient.get<CategoriesResponse>("/categories");
     return response.data.data ?? [];
   },
 
-  async createCategory(data: Partial<Categories>): Promise<Categories> {
+  async getCategoryById(id: number): Promise<Category> {
+    const response = await apiClient.get<CategoryResponse>(`/categories/${id}`);
+    return response.data.data;
+  },
+
+  async createCategory(data: Partial<CategoryForm>): Promise<CategoryForm> {
     const response = await apiClient.post("/categories", data);
     return response.data.data ?? [];
   },
 
   async updateCategory(
     id: number | string,
-    data: Partial<Categories>,
-  ): Promise<Categories> {
+    data: Partial<CategoryForm>,
+  ): Promise<CategoryForm> {
     const response = await apiClient.put(`/categories/${id}`, data);
     return response.data.data;
   },

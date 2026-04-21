@@ -2,11 +2,11 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { categoriesService } from "@/service/categories/categoriesService";
-import { Categories, CategoriesRespones } from "@/types/categories";
+import { Category } from "@/types/categories";
 import { showToast } from "@/lib/toast";
 
 export const useCategories = () => {
-  const [categories, setCategories] = useState<CategoriesRespones[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<boolean>(false);
@@ -50,6 +50,6 @@ export const useCategories = () => {
     categories,
     error,
     ConfirmDelete,
-    deleting
+    deleting,
   };
 };
