@@ -26,6 +26,19 @@ export const useCategories = () => {
     }
   }, []);
 
+  const ConfirmDelete = async (id: string | number) => {
+    try {
+      setLoading(true);
+      await categoriesService.deleteCategory(id);
+      showToast("ลบข้อมูลสำเร็จ", "success");
+      await fetchCategories();
+    } catch (error) {
+      showToast("ลบข้อมูลไม่สำเร็จ", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
@@ -35,5 +48,6 @@ export const useCategories = () => {
     loading,
     categories,
     error,
+    ConfirmDelete,
   };
 };

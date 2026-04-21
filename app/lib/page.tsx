@@ -307,7 +307,7 @@ export default function MyPage() {
           ลบรายการนี้
         </BaseButton>
 
-        <BaseConfirmModal
+         <BaseConfirmModal
           isOpen={showDelete}
           onClose={() => setShowDelete(false)}
           onConfirm={handleDelete}
