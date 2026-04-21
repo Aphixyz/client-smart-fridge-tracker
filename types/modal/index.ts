@@ -15,9 +15,10 @@ export interface ConfirmModalProps {
     onClose: () => void;
     onConfirm: () => void;
     title?: string;
-    description: string;
-    type?: 'danger' | 'warning' | 'success' | 'info';
+    description?: string;
+    type?: 'danger' | 'warning' | 'success' | 'info' | 'question' ;
     confirmText?: string;
     cancelText?: string;
     isLoading?: boolean;
+    size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }

@@ -21,13 +21,14 @@ const BaseButton = ({
     // 2. Variants (เพิ่ม Ghost และ Link)
     const variants = {
         primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm focus:ring-blue-500",
-        secondary: "bg-slate-100 text-slate-800 hover:bg-slate-200 focus:ring-slate-400",
+        secondary: "bg-slate-200 text-slate-800 hover:bg-slate-300 focus:ring-slate-400",
         danger: "bg-red-500 text-white hover:bg-red-600 shadow-sm focus:ring-red-400",
         outline: "border border-slate-300 text-slate-700 hover:bg-slate-50 focus:ring-slate-200",
         ghost: "bg-transparent text-slate-600 hover:bg-slate-100",
         link: "bg-transparent text-blue-600 hover:underline px-0 py-0 h-auto shadow-none",
         emral:"bg-[#2ECC71] text-white shadow-sm focus:ring-[#2ECC71]",
-        cancel:"bg-[#CDEAFF] text-black shadow-sm focus:ring-[#2ECC71]"
+        cancel:"bg-[#CDEAFF] text-black shadow-sm focus:ring-[#2ECC71]",
+        trash:"absolute top-3 right-3 w-10 h-10 !p-0 flex items-center justify-center bg-gray-200 rounded-full hover:bg-red-100 transition-colors",
     };
 
     // 3. Sizes
