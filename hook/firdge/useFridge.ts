@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Fridge } from "@/types/fridge/responce";
+import { Fridge } from "@/types/fridge";
 import { fridgeService } from "@/service/fridge/fridgeService";
 import { refresh } from "next/cache";
 

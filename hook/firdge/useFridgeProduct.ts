@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { FridgeProduct } from "@/types/fridge/responce";
+import { FridgeProduct } from "@/types/fridge";
 import { fridgeProductService } from "@/service/fridge/fridgeService";
 import { showToast } from '@/lib/toast'
 
