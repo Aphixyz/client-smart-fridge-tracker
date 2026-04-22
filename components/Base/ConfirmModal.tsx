@@ -21,7 +21,7 @@ function ConfirmModal({
     size = 'sm'
 }: ConfirmModalProps) {
 
-    type ButtonVariant = 'primary' | 'danger';
+    type ButtonVariant = 'primary' | 'danger' | 'emral';
 
 
     const config: Record<string, { icon: React.ReactNode; btn: ButtonVariant; iconStyle: string }> = {
@@ -32,6 +32,11 @@ function ConfirmModal({
         question: {
             icon: <HelpCircle className="text-slate-300" size={50} strokeWidth={2.5} />, 
             btn: 'danger', 
+            iconStyle: 'bg-slate-50 border-[6px] border-slate-100 h-30 w-30 flex items-center justify-center'
+        },
+        'question-success': {
+            icon: <HelpCircle className="text-slate-300" size={50} strokeWidth={2.5} />, 
+            btn: 'emral', 
             iconStyle: 'bg-slate-50 border-[6px] border-slate-100 h-30 w-30 flex items-center justify-center'
         },
     };

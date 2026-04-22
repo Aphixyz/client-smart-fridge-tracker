@@ -116,7 +116,8 @@ function Dropdown({
                 filteredOptions.map((option) => (
                   <li
                     key={option.value}
-                    onClick={() => {
+                   onMouseDown={(e) => {
+                      e.preventDefault();
                       onChange(option.value);
                       setIsOpen(false);
                       setSearchTerm('');

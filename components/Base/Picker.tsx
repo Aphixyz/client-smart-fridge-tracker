@@ -48,6 +48,7 @@ function BaseDatePicker({
                     disabled={disabled}
                     dateFormat="dd/MM/yyyy"
                     placeholderText={placeholder}
+                    wrapperClassName="w-full"
                     calendarClassName={`base-datepicker-calendar ${panel !== 'calendar' ? 'base-datepicker-calendar--picker-open' : ''}`}
                     // ใช้ PopperModifiers เพื่อลดเงาและปรับระยะ
                     renderCustomHeader={({ date, changeYear, changeMonth, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }) => (
