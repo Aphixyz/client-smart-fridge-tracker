@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { fridgeProductService } from "@/service/fridge/fridgeService";
 import { showToast } from "@/lib/toast";
-import { FormProudct } from "@/types/fridge/responce";
+import { FormProudct } from "@/types/fridge";
 
 const initialForm: FormProudct = {
   category_id: 0,

@@ -1,5 +1,5 @@
 import apiClient from "@/plugins/axios";
-import type { Fridge, FridgeProduct } from "@/types/fridge/responce";
+import type { Fridge, FridgeProduct } from "@/types/fridge";
 
 export const fridgeService = {
   async getFridges(): Promise<Fridge[]> {

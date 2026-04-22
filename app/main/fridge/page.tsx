@@ -5,7 +5,7 @@ import Image from 'next/image'
 import BaseCard from '@/components/Base/Card'
 import BaseLoading from '@/components/Base/Loading'
 import { useFridge } from '@/hook/firdge/useFridge'
-import type { Fridge } from '@/types/fridge/responce'
+import type { Fridge } from '@/types/fridge'
 import Link from 'next/link'
 
 export default function FridgePage() {
