@@ -74,7 +74,7 @@ export default function ManageFridge() {
         onChange={(date) => updateField("expiry_date", date?.toISOString())}
       />
 
-      <div className="flex justify-between gap-20">
+      <div className="flex justify-between gap-10">
         <BaseButton
           variant="emral"
           size="lg"

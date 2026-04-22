@@ -104,14 +104,14 @@ export default function FridgeDetailPage() {
         ))}
       </div>
 
-        <div className="fixed bottom-10 right-10 z-50">
+        <div className="flex justify-end mt-10 ">
         <BaseButton
           variant="cancel"
           size='lg'
           shape='rounded'  
           onClick={() => router.push("/main/fridge/" + fridgeId + "/manageFridge")}
         >
-          จัดการตู้เย็น
+          นำเข้าวัตถุดิบ
         </BaseButton>
       </div>
 
