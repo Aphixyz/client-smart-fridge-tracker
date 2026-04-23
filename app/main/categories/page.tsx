@@ -7,7 +7,7 @@ import BaseLoading from "@/components/Base/Loading";
 import { BaseTable } from "@/components/Base/Table";
 import Button from "@/components/Base/Button";
 import { Pencil, Trash2 } from "lucide-react";
-import { Categories } from "@/hook/categories/useCategories"; 
+import { Category } from "@/types/categories/index";
 import { Column } from "@/types/table";
 import Image from "next/image";
 import { useState } from "react";
@@ -17,6 +17,10 @@ import BaseButton from "@/components/Base/Button";
 export default function Categoriespage() {
   const router = useRouter();
 
+  const [showDelete, setShowDelete] = useState(false);
+
+  const [selectCateId, setSelectCateId] = useState<number | null>(null);
+
   const {
     categories,
     loading,
@@ -24,10 +28,7 @@ export default function Categoriespage() {
     ConfirmDelete,
   } = useCategories();
 
-  const [showDelete, setShowDelete] = useState(false);
-
-  const [selectCateId, setSelectCateId] = useState<number | null>(null);
-
+  
   const hanleDelete = async (id: number) => {
     setSelectCateId(id);
     setShowDelete(true);
@@ -50,10 +51,10 @@ export default function Categoriespage() {
     );
   }
 
-  const columns: Column<Categories>[] = [
+  const columns: Column<Category>[] = [
     {
       header: "รูปไอค่อน",
-      accessor: (item: Categories) => {
+      accessor: (item: Category) => {
         const imageUrl = item.icon
           ? `${process.env.NEXT_PUBLIC_BASE_URL}${item.icon}`
           : "/icons/fridge.png";

@@ -28,6 +28,24 @@ export const useCategoryForm = (categoryId?: number) => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const handleFileChange = useCallback((file: File) => {
+    const previewUrl = URL.createObjectURL(file);
+    setFormData((prev) => ({
+      ...prev,
+      iconFile: file,
+      preview: previewUrl,
+    }));
+  }, []);
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }, []);
+
   const fetchCategoryDetail = useCallback(async () => {
     if (!isEditMode || !categoryId) return;
 
@@ -49,28 +67,6 @@ export const useCategoryForm = (categoryId?: number) => {
       setLoading(false);
     }
   }, [categoryId, isEditMode]);
-
-  useEffect(() => {
-    fetchCategoryDetail();
-  }, [fetchCategoryDetail]);
-
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }, []);
-
-  const handleFileChange = useCallback((file: File) => {
-    const previewUrl = URL.createObjectURL(file);
-    setFormData((prev) => ({
-      ...prev,
-      iconFile: file,
-      preview: previewUrl,
-    }));
-  }, []);
 
   const handleSubmit = async () => {
     setSubmitLoading(true);
@@ -104,6 +100,10 @@ export const useCategoryForm = (categoryId?: number) => {
       setSubmitLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchCategoryDetail();
+  }, [fetchCategoryDetail]);
 
   return {
     formData,
