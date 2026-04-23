@@ -1,7 +1,6 @@
 import apiClient from "@/plugins/axios";
 import {
   CategoriesResponse,
-  CategoryForm,
   Category,
   CategoryResponse,
 } from "@/types/categories/index";

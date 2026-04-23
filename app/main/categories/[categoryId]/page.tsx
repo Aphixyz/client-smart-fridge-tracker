@@ -14,6 +14,9 @@ export default function CategoryDetailPage() {
   const params = useParams();
   const categoryId = params?.categoryId ? Number(params.categoryId) : undefined;
   const route = useRouter();
+
+  const [showCreate, setShowCreate] = useState(false);
+
   const {
     formData,
     handleChange,
@@ -24,7 +27,6 @@ export default function CategoryDetailPage() {
     isEditMode,
   } = useCategoryForm(categoryId);
 
-  const [showCreate, setShowCreate] = useState(false);
 
   const handleCreate = async () => {
     setShowCreate(true);
