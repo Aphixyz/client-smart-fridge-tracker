@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useCategories } from "@/hook/categories/useCategories";
 import BaseLoading from "@/components/Base/Loading";
 import { BaseTable } from "@/components/Base/Table";
 import Button from "@/components/Base/Button";
 import { Pencil, Trash2 } from "lucide-react";
-import { Categories } from "@/types/categories";
+import { Categories } from "@/hook/categories/useCategories"; 
 import { Column } from "@/types/table";
 import Image from "next/image";
 import { useState } from "react";
@@ -14,14 +15,15 @@ import BaseConfirmModal from "@/components/Base/ConfirmModal";
 import BaseButton from "@/components/Base/Button";
 
 export default function Categoriespage() {
+  const router = useRouter();
+
   const {
-    fetchCategories,
     categories,
     loading,
     deleting,
     ConfirmDelete,
-    handleNavigate,
   } = useCategories();
+
   const [showDelete, setShowDelete] = useState(false);
 
   const [selectCateId, setSelectCateId] = useState<number | null>(null);
@@ -34,6 +36,10 @@ export default function Categoriespage() {
   const handleConfirmDeleted = async () => {
     await ConfirmDelete(Number(selectCateId));
     setShowDelete(false);
+  };
+
+  const handleNavigate = (id: number) => {
+    router.push(`/main/categories/${id}`);
   };
 
   if (loading) {
@@ -132,7 +138,7 @@ export default function Categoriespage() {
         <BaseButton
           shape="full"
           variant="primary"
-          onClick={handleNavigate}
+          onClick={() => router.push("/main/categories/0")}
         >
           เพิ่มข้อมูลใหม่
         </BaseButton>
