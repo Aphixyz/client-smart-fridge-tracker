@@ -1,7 +1,10 @@
 "use client";
 
+import axios from "axios";
 import { CategoryForm } from "@/types/categories";
-import { useRouter } from "next/navigation";
+import { categoriesService } from "@/service/categories/categoriesService";
+import { showToast } from "@/lib/toast";
+
 import {
   useState,
   useEffect,
@@ -9,16 +12,15 @@ import {
   ChangeEvent,
   FormEvent,
 } from "react";
-import { categoriesService } from "@/service/categories/categoriesService";
 
 const initialForm: CategoryForm = {
   name: "",
   icon: "",
+  iconFile: null,
+  preview: "",
 };
 
 export const useCategoryForm = (categoryId?: number) => {
-  const router = useRouter();
-
   const isEditMode = !!categoryId && categoryId !== 0;
 
   const [formData, setFormData] = useState<CategoryForm>(initialForm);
@@ -37,9 +39,11 @@ export const useCategoryForm = (categoryId?: number) => {
       setFormData({
         name: data.name ?? "",
         icon: data.icon ?? "",
+        iconFile: null,
+        preview: data.icon ?? "",
       });
     } catch (err) {
-      setError("ไม่สามารถโหลดข้อมูลหมวดหมู่ได้");
+      showToast("ไม่สามารถโหลดข้อมูลหมวดหมู่ได้");
       console.error(err);
     } finally {
       setLoading(false);
@@ -59,30 +63,47 @@ export const useCategoryForm = (categoryId?: number) => {
     }));
   }, []);
 
-  const handleSubmit = useCallback(
-    async (e?: FormEvent) => {
-      e?.preventDefault();
+  const handleFileChange = useCallback((file: File) => {
+    const previewUrl = URL.createObjectURL(file);
+    setFormData((prev) => ({
+      ...prev,
+      iconFile: file,
+      preview: previewUrl,
+    }));
+  }, []);
 
-      setSubmitLoading(true);
-      setError(null);
+  const handleSubmit = async () => {
+    setSubmitLoading(true);
 
-      try {
-        if (isEditMode && categoryId) {
-          await categoriesService.updateCategory(categoryId, formData);
-        } else {
-          await categoriesService.createCategory(formData);
-        }
+    try {
+      const payload = new FormData();
+      payload.append("name", formData.name);
 
-        router.push("/categories");
-      } catch (err) {
-        setError("บันทึกข้อมูลไม่สำเร็จ");
-        console.error(err);
-      } finally {
-        setSubmitLoading(false);
+      if (formData.iconFile) {
+        payload.append("icon", formData.iconFile);
       }
-    },
-    [categoryId, formData, isEditMode, router],
-  );
+
+      if (categoryId) {
+        await categoriesService.updateCategory(categoryId, payload);
+        showToast("อัปเดทข้อมูลสำเร็จ", "success");
+      } else {
+        await categoriesService.createCategory(payload);
+        showToast("เพิ่มข้อมูลสำเร็จ", "success");
+      }
+
+      setFormData(initialForm);
+      return true;
+    } catch (error) {
+      let message = "เกิดข้อผิดพลาด";
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || message;
+      }
+      showToast(message, "error");
+      return false;
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
 
   return {
     formData,
@@ -92,6 +113,7 @@ export const useCategoryForm = (categoryId?: number) => {
     error,
     isEditMode,
     handleChange,
+    handleFileChange,
     handleSubmit,
   };
 };

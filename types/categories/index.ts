@@ -19,4 +19,6 @@ export interface CategoriesResponse {
 export interface CategoryForm {
   name: string;
   icon: string;
+  iconFile?:File | null;
+  preview:string;
 }

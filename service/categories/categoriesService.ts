@@ -17,17 +17,22 @@ export const categoriesService = {
     return response.data.data;
   },
 
-  async createCategory(data: Partial<CategoryForm>): Promise<CategoryForm> {
-    const response = await apiClient.post("/categories", data);
-    return response.data.data ?? [];
+  createCategory: async (data: FormData) => {
+    const response = await apiClient.post("/categories", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
   },
 
-  async updateCategory(
-    id: number | string,
-    data: Partial<CategoryForm>,
-  ): Promise<CategoryForm> {
-    const response = await apiClient.put(`/categories/${id}`, data);
-    return response.data.data;
+  updateCategory: async (id: number, data: FormData) => {
+    const response = await apiClient.put(`/categories/${id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
   },
 
   async deleteCategory(id: number | string): Promise<void> {
