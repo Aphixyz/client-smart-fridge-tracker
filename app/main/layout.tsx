@@ -26,6 +26,11 @@ const myMenu: MenuItem[] = [
     icon: "LayoutDashboard",
     href: "/lib",
   },
+  {
+    title: "ตั้งค่าตู้เย็น",
+    icon: "LayoutDashboard",
+    href: "/main/setting",
+  },
 ];
 
 export default function RootLayout({
