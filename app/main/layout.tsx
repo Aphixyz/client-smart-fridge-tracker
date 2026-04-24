@@ -29,7 +29,7 @@ const myMenu: MenuItem[] = [
   {
     title: "ตั้งค่าตู้เย็น",
     icon: "LayoutDashboard",
-    href: "/main/nonti",
+    href: "/main/setting",
   },
 ];
 
