@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { fridgeProductService } from "@/service/fridge/fridgeService";
 import { showToast } from "@/lib/toast";
 import { FormProudct } from "@/types/fridge";
+import { productService } from "@/service/product/productService";
+
 
 const initialForm: FormProudct = {
   category_id: 0,
@@ -14,12 +16,11 @@ const initialForm: FormProudct = {
   expiry_date: "",
 };
 
-export const useAddFridgeProduct = (fridgeId: number) => {
+export const useAddFridgeProduct = (fridgeId: number, productId: number) => {
   const [formData, setFormData] = useState<FormProudct>(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // ฟังก์ชันอัปเดต State ที่รองรับทั้ง Event และการส่งค่าตรงๆ
   const updateField = (name: string, value: any) => {
     setFormData((prev) => ({
       ...prev,
@@ -36,14 +37,37 @@ export const useAddFridgeProduct = (fridgeId: number) => {
     updateField(name, value);
   };
 
-  const handleSubmit = async () => {
-    // สามารถเพิ่ม Validation Logic ตรงนี้ได้เหมือน useRegister
+  const fetchProductData = async () => {
+    if (productId !== 0) {
+      try {
+        const data = await productService.getProductById(productId);
+        if (data) {
+          setFormData({
+            category_id: data.category_id,
+            name: data.name,
+            quantity: data.quantity,
+            unit: data.unit,
+            expiry_date: data.expiry_date,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    }
+  };
+
+  const hybridProduct = async () => {
     setIsSubmitting(true);
     try {
-      await fridgeProductService.insertProductToFridge(fridgeId, formData);
-      showToast("เพิ่มสินค้าสำเร็จ", "success");
-      setFormData(initialForm); // Reset form
-      return true; // คืนค่า true เพื่อบอกหน้า UI ว่าสำเร็จ
+      if (productId !== 0) {
+        await productService.updateProduct(productId, formData);
+        showToast('อัปเดตสินค้าสำเร็จ', 'success');
+      } else {
+        await fridgeProductService.insertProductToFridge(fridgeId, formData);
+        showToast("เพิ่มสินค้าสำเร็จ", "success");
+      }
+      setFormData(initialForm);
+      return true;
     } catch (err) {
       let message = "เกิดข้อผิดพลาด";
       if (axios.isAxiosError(err)) {
@@ -56,12 +80,16 @@ export const useAddFridgeProduct = (fridgeId: number) => {
     }
   };
 
+  useEffect(() => {
+    fetchProductData();
+  }, [productId]);
+
   return {
     formData,
     isSubmitting,
     errors,
     handleChange,
-    updateField, // ใช้ตัวนี้กับพวก Dropdown/Date
-    handleSubmit,
+    updateField,
+    hybridProduct,
   };
 };

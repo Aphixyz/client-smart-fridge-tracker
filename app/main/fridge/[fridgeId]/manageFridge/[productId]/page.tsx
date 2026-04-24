@@ -15,21 +15,22 @@ export default function ManageFridge() {
   const params = useParams();
   const router = useRouter();
   const fridgeId = Number(params.fridgeId);
-
+  const productId = Number(params.productId);
+  const editMode = productId !== 0;
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const { categories, loading: catLoading } = useCategories();
+  const {loading: catLoading, categoryOptions } = useCategories();
   const { 
     formData, 
     isSubmitting, 
     handleChange, 
     updateField, 
-    handleSubmit 
-  } = useAddFridgeProduct(fridgeId);
+    hybridProduct 
+  } = useAddFridgeProduct(fridgeId, productId);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onConfirmAdd = async () => {
-    const success = await handleSubmit();
+  const handleConfirm = async () => {
+    const success = await hybridProduct();
     if (success) {
       setIsModalOpen(false);
       router.push(`/main/fridge/${fridgeId}`);
@@ -41,7 +42,7 @@ export default function ManageFridge() {
       <BaseDropdown
         label="ประเภทวัตถุดิบ"
         placeholder={catLoading ? "กำลังโหลด..." : "กรุณาเลือกประเภท..."}
-        options={categories.map((c) => ({ label: c.name, value: c.id }))}
+        options={categoryOptions}
         value={formData.category_id}
         onChange={(val) => updateField("category_id", val)}
       />
@@ -82,7 +83,7 @@ export default function ManageFridge() {
           onClick={() => setIsModalOpen(true)}
           disabled={isSubmitting}
         >
-          เพิ่มรายการวัตถุดิบ
+          {editMode ? "อัปเดตรายการวัตถุดิบ" : "เพิ่มรายการวัตถุดิบ"}
         </BaseButton>
 
         <BaseButton
@@ -98,7 +99,7 @@ export default function ManageFridge() {
       <BaseConfirmModal
         isOpen={isModalOpen}
         onClose={() => !isSubmitting && setIsModalOpen(false)}
-        onConfirm={onConfirmAdd}
+        onConfirm={handleConfirm}
         title="ต้องการนำวัตถุดิบไปเข้าแช่ตู้หรือไม่"
         type="question-success"
         confirmText="แช่เลย"

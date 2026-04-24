@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { categoriesService } from "@/service/categories/categoriesService";
-import { Category } from "@/types/categories";
+import { Category, CategoryOption } from "@/types/categories";
 import { showToast } from "@/lib/toast";
 
 export const useCategories = () => {
@@ -11,13 +11,22 @@ export const useCategories = () => {
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<boolean>(false);
 
+  const [categoryOptions, setCategoryOptions] = useState<CategoryOption[]>([]); 
+
+
+  const mapCategoriesToOptions = (categories: Category[]): CategoryOption[] => {
+    return categories.map((c) => ({ label: c.name, value: c.id }));
+  };
+
   const fetchCategories = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
       const data = await categoriesService.getCategories();
-      setCategories(data);
+      setCategories(data);     
+      
+      setCategoryOptions(mapCategoriesToOptions(data));
     } catch (err) {
       const message = "ไม่สามารถโหลดข้อมูลหมวดหมู่ได้";
       setError(message);
@@ -45,6 +54,7 @@ export const useCategories = () => {
   }, [fetchCategories]);
 
   return {
+    categoryOptions,
     fetchCategories,
     loading,
     categories,

@@ -16,6 +16,11 @@ export interface CategoriesResponse {
   data: Category[];
 }
 
+export interface CategoryOption {
+  label: string;
+  value: number;
+}
+
 export interface CategoryForm {
   name: string;
   icon: string;

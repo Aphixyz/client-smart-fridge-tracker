@@ -54,13 +54,16 @@ export default function FridgeDetailPage() {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-h-[450px] gap-20">
         {products.map((product: FridgeProduct) => (
-          <BaseCard key={product.id} className="p-4 border shadow-lg relative">
+          <BaseCard onClick={() => router.push(`/main/fridge/${fridgeId}/manageFridge/${product.id}`)} key={product.id} className="p-4 border shadow-lg relative">
 
             <BaseButton
               size='lg'
               shape='full'
               variant="trash"
-              onClick={() => handleDeleteClick(product.id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteClick(product.id)
+              }}
             >
               <Trash2 className="w-10 h-8 text-red-500 hover:scale-110 transition-transform cursor-pointer" />
             </BaseButton>
@@ -104,12 +107,12 @@ export default function FridgeDetailPage() {
         ))}
       </div>
 
-        <div className="flex justify-end mt-10 ">
+        <div className="fixed bottom-0 left-0 right-0 flex justify-end p-4">
         <BaseButton
           variant="cancel"
           size='lg'
           shape='rounded'  
-          onClick={() => router.push("/main/fridge/" + fridgeId + "/manageFridge")}
+          onClick={() => router.push("/main/fridge/" + fridgeId + "/manageFridge/"+0)}
         >
           นำเข้าวัตถุดิบ
         </BaseButton>

@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect } from 'react'
 import Image from 'next/image'
 import BaseCard from '@/components/Base/Card'
 import BaseLoading from '@/components/Base/Loading'
