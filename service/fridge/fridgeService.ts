@@ -6,6 +6,11 @@ export const fridgeService = {
     const response = await apiClient.get("/fridges");
     return response.data.data;
   },
+
+  async createFridge(payload: any): Promise<any> {
+    const response = await apiClient.post("/fridges", payload);
+    return response.data;
+  }
 };
 
 export const fridgeProductService = {
