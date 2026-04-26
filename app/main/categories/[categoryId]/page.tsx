@@ -101,7 +101,7 @@ export default function CategoryDetailPage() {
           onClose={() => setShowCreate(false)}
           onConfirm={handleConfirmCreate}
           isLoading={false}
-          type="success"
+          type="emerald"
           title="คุณแน่ใจหรือไม่?"
           description="คุณต้องการดำเนินการต่อใช่หรือไม่?"
           confirmText="ใช่"
