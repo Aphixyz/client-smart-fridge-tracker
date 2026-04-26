@@ -28,9 +28,10 @@ export default function FridgePage() {
                     <BaseCard key={fridge.fridge_id} className="flex flex-col items-center p-6 border shadow-lg">
                         <Image src="/fridge.png" alt="Fridge" width={200} height={200} className="mb-6" />
                         <div className="space-y-2 text-center">
-                            <h2 className="text-xl md:text-2xl text-slate-800 font-kanit">
+                             <h2 className="text-xl md:text-2xl text-slate-800 font-kanit">
                                 จำนวนวัตถุดิบในตู้{' '}
-                                <span className="text-emerald-500 font-kanit text-3xl mx-1">
+                                <span className={`${Number(fridge.inactive_items_count) > 0 ? 'text-red-500' : 'text-emerald-500'
+                                    } font-kanit text-3xl mx-1`}>
                                     {fridge.total_items}
                                 </span>{' '}
                                 ชิ้น

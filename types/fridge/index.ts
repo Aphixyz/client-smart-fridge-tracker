@@ -5,6 +5,7 @@ interface Fridge {
   total_items: string;
   total_quantity: string;
   total_categories: string;
+  inactive_items_count: string;
 }
 
 interface FridgeResponse {
