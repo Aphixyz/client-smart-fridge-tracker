@@ -55,7 +55,7 @@ export default function NotificationPage() {
 
             <div className="flex justify-between mt-20 gap-10">
                 <BaseButton
-                    variant="emral"
+                    variant="emerald"
                     size="lg"
                     className="mt-4 w-full"
                     onClick={() => setIsModalOpen(true)}

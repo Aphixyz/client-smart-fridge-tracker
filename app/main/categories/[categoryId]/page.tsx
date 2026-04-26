@@ -78,7 +78,7 @@ export default function CategoryDetailPage() {
             <div className="flex gap-3 pt-6">
               <BaseButton
                 type="button"
-                variant="emral"
+                variant="emerald"
                 fullWidth
                 isLoading={submitLoading}
                 disabled={submitLoading}
@@ -101,7 +101,7 @@ export default function CategoryDetailPage() {
           onClose={() => setShowCreate(false)}
           onConfirm={handleConfirmCreate}
           isLoading={false}
-          type="question-success"
+          type="success"
           title="คุณแน่ใจหรือไม่?"
           description="คุณต้องการดำเนินการต่อใช่หรือไม่?"
           confirmText="ใช่"

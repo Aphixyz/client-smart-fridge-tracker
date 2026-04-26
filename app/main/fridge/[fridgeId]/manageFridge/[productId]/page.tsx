@@ -77,7 +77,7 @@ export default function ManageFridge() {
 
       <div className="flex justify-between gap-10">
         <BaseButton
-          variant="emral"
+          variant="emerald"
           size="lg"
           className="mt-4 w-full"
           onClick={() => setIsModalOpen(true)}

@@ -96,7 +96,7 @@ export default function FridgePage() {
                 footer={
                     <div className="flex gap-4 w-full">
                         <BaseButton
-                            variant="emral"
+                            variant="emerald"
                             size="lg"
                             className="w-full"
                             onClick={onConfirmAdd}

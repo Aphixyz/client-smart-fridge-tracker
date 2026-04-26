@@ -51,7 +51,7 @@ function Page() {
           <BaseButton
             type="submit"
             shape="rounded"
-            variant="emral"
+            variant="emerald"
             disabled={loading}
             className="w-full md:w-8/12 gap-2"
           >
