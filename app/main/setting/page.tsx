@@ -78,7 +78,7 @@ export default function NotificationPage() {
                 onClose={() => !isSubmitting && setIsModalOpen(false)}
                 onConfirm={handleConfirmSave}
                 title="ต้องการตั้งค่าการแจ้งเตือนหรือไม่"
-                type="question-success"
+                type="emerald"
                 confirmText="ยืนยัน"
                 cancelText="ยกเลิก"
                 isLoading={isSubmitting}

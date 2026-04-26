@@ -14,7 +14,7 @@ export interface ConfirmModalProps {
   onClose: () => void;
   onConfirm: () => void;
   title?: string;
-  description: string;
+  description?: string;
   type?: "danger" | "warning" | "success" | "info" | "emerald";
   confirmText?: string;
   cancelText?: string;

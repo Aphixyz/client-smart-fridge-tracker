@@ -126,7 +126,7 @@ export default function FridgeDetailPage() {
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleConfirmDelete}
         title={`ต้องการนำวัตถุดิบไปทิ้งใช่ไหม`}
-        type="question"
+        type="emerald"
         confirmText="นำทิ้ง"
         cancelText="ยกเลิก"
         isLoading={isDeleting}

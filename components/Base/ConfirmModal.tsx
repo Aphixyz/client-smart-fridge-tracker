@@ -18,8 +18,8 @@ function ConfirmModal({
     isLoading = false,
     shape = "full",
     btnSize = "sm",
-}: ConfirmModalProps) {
-    type ButtonVariant = "primary" | "danger" | 'emerald';
+}: ConfirmModalProps) { 
+    type ButtonVariant = "primary" | "danger" | 'emerald' ;
 
     const config: Record<
         NonNullable<ConfirmModalProps["type"]>,

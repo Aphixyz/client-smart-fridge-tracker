@@ -101,7 +101,7 @@ export default function ManageFridge() {
         onClose={() => !isSubmitting && setIsModalOpen(false)}
         onConfirm={handleConfirm}
         title="ต้องการนำวัตถุดิบไปเข้าแช่ตู้หรือไม่"
-        type="question-success"
+        type="emerald"
         confirmText="แช่เลย"
         cancelText="ยกเลิก"
         isLoading={isSubmitting}
