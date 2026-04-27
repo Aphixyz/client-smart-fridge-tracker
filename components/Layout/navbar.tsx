@@ -11,8 +11,13 @@ import {
 } from "lucide-react";
 import { useClickOutside } from "@/hook/useClickOutside";
 import { AuthService } from "@/service/Auth/authService";
+import { useLogin } from "@/hook/user/userLogin";
+
 export default function Navbar() {
+
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    const { session } = useLogin();
 
     // ปิด dropdown เมื่อคลิกข้างนอก
     const dropdownRef = useClickOutside<HTMLDivElement>(() =>
@@ -37,14 +42,20 @@ export default function Navbar() {
                         className="flex items-center gap-2 p-1 rounded-full hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
                     >
                         <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-sm ring-2 ring-white">
-                            <User size={18} />
+
+                            {session?.data?.profile_image ? (
+                                <img src={`${process.env.NEXT_PUBLIC_BASE_URL}${session?.data?.profile_image}`} alt="Profile" width={20} height={20} className="w-full h-full object-cover rounded-full" />
+                            ) : (
+                                <User size={18} />
+                            )}
+
                         </div>
                         <div className="hidden lg:flex flex-col items-start leading-none ml-1">
                             <span className="text-sm font-bold text-slate-700">
-                                Administrator
+                                {session?.data?.name || 'ยังไม่ตั้งชื่อ'}
                             </span>
                             <span className="text-[10px] text-slate-400 mt-0.5">
-                                Super Admin
+                                {session?.data?.username || 'ไม่มีชื่อผู้ใช้'}
                             </span>
                         </div>
                         <ChevronDown

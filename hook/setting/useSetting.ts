@@ -5,14 +5,20 @@ import { Notification } from "@/types/setting";
 import { settingService } from "@/service/setting/settingService";
 import { showToast } from "@/lib/toast";
 
-const initialForm: Notification = {
-    id: 0,
-    alert_threshold_days: null,
-    push_notification_enabled: false,
-}
 
 export const useSetting = () => {
+
+    const initialForm: Notification = {
+        id: 0,
+        alert_threshold_days: null,
+        push_notification_enabled: false,
+    }
+
     const [formData, setFormData] = useState<Notification>(initialForm);
+
+
+
+    
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -58,13 +64,13 @@ export const useSetting = () => {
                     alert_threshold_days: updatedData.alert_threshold_days,
                     push_notification_enabled: updatedData.push_notification_enabled,
                 });
-                showToast("success","success");
-                return true; 
+                showToast("success", "success");
+                return true;
             }
             return false;
         } catch (error) {
-            showToast("error","error");
-            return false; 
+            showToast("error", "error");
+            return false;
         } finally {
             setIsSubmitting(false);
         }

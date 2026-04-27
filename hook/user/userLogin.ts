@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import type { LoginFormData } from "@/types/user/request";
-import type { LoginResponse } from "@/types/user/response";
+import type { LoginResponse, UserProfileResponse } from "@/types/user/response";
 import { AuthService } from "@/service/Auth/authService";
 import { showToast } from "@/lib/toast";
 import { validateLoginForm, type LoginFormErrors } from "@/validator/login";
@@ -15,13 +15,14 @@ const initialForm: LoginFormData = {
 };
 
 export const useLogin = () => {
-  const router = useRouter();
 
+  const router = useRouter();
   const [form, setForm] = useState<LoginFormData>(initialForm);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [submitError, setSubmitError] = useState("");
   const [data, setData] = useState<LoginResponse | null>(null);
+  const [session, setSession] = useState<UserProfileResponse | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -105,6 +106,20 @@ export const useLogin = () => {
     }
   };
 
+  const getProfileUser = async (): Promise<void> => {
+    try {
+      const response: UserProfileResponse = await AuthService.getProfile();
+      setSession(response);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProfileUser();
+  }, []);
+
+
   return {
     form,
     loading,
@@ -113,5 +128,6 @@ export const useLogin = () => {
     data,
     handleChange,
     handleSubmit,
+    session
   };
 };

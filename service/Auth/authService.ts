@@ -1,5 +1,6 @@
 import apiClient from "@/plugins/axios";
 import { AuthToken } from "@/plugins/auth";
+import { UserProfileResponse } from "@/types/user/response";
 
 export type LoginFormData = {
   username: string;
@@ -23,26 +24,13 @@ export type LoginResponse = {
 export const AuthService = {
   login: async (payload: LoginFormData): Promise<LoginResponse> => {
     const response = await apiClient.post("/auth/login", payload);
-    const user = response.data?.data?.user;
-    if (user) {
-      AuthToken.setUser(user);
-    }
     return response.data;
   },
 
-  // getProfile: async (): Promise<LoginResponse> => {
-  //   try {
-  //     const response = await apiClient.get("/auth/session");
-  //     const user = response.data?.data?.user;
-  //     if (user) {
-  //       AuthToken.setUser(user);
-  //     }
-  //     return response.data;
-  //   } catch (error) {
-  //     AuthToken.clear();
-  //     throw error;
-  //   }
-  // },
+  getProfile: async (): Promise<UserProfileResponse> => {
+    const response = await apiClient.get("/profiles");
+    return response.data;
+  },
 
   logout: async (): Promise<void> => {
     try {

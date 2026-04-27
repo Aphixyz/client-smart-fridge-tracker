@@ -39,3 +39,10 @@ export interface LoginResponse {
     };
   };
 }
+
+export interface UserProfileResponse {
+  id: number;
+  username: string;
+  name: string;
+  profile_image: string;
+}

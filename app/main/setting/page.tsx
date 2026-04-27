@@ -12,6 +12,8 @@ import BaseSpinner from "@/components/Base/Spinner";
 
 export default function NotificationPage() {
     const router = useRouter();
+
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const {
@@ -54,24 +56,24 @@ export default function NotificationPage() {
             />
 
             <div className="flex justify-between mt-20 gap-10">
-                <BaseButton
-                    variant="emerald"
-                    size="lg"
-                    className="mt-4 w-full"
-                    onClick={() => setIsModalOpen(true)}
-                >
-                    ยืนยันการตั้งค่าการแจ้งเตือน
-                </BaseButton>
+                    <BaseButton
+                        variant="emerald"
+                        size="lg"
+                        className="mt-4 w-full"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        ยืนยันการตั้งค่าการแจ้งเตือน
+                    </BaseButton>
 
-                <BaseButton
-                    variant="cancel"
-                    size="lg"
-                    className="mt-4 w-full"
-                    onClick={() => router.back()}
-                >
-                    ยกเลิก
-                </BaseButton>
-            </div>
+                    <BaseButton
+                        variant="cancel"
+                        size="lg"
+                        className="mt-4 w-full"
+                        onClick={() => router.back()}
+                    >
+                        ยกเลิก
+                    </BaseButton>
+                </div>
 
             <BaseConfirmModal
                 isOpen={isModalOpen}
