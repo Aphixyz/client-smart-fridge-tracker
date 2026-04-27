@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { AuthToken } from "@/plugins/auth";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,

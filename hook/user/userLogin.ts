@@ -65,18 +65,18 @@ export const useLogin = () => {
 
     try {
       const response = await AuthService.login(form);
-
       setData(response);
       setForm(initialForm);
 
-      showToast("เข้าสู่ระบบสำเร็จ", "success");
 
-      // เก็บ user ถ้าต้องการ
-      if (typeof window !== "undefined") {
-        localStorage.setItem("user", JSON.stringify(response.data?.user));
+
+      if (!response.success) {
+        showToast('รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง', "error");
+      } else {
+        showToast("เข้าสู่ระบบสำเร็จ", "success");
+        router.push("/main");
       }
 
-      router.push("/main");
     } catch (err) {
       let message = "เกิดข้อผิดพลาดจากเครือข่าย";
 
