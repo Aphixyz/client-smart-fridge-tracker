@@ -74,6 +74,7 @@ export const useLogin = () => {
       if (!response.success) {
         showToast('รหัสผ่านหรือชื่อผู้ใช้ไม่ถูกต้อง', "error");
       } else {
+        await getProfileUser();
         showToast("เข้าสู่ระบบสำเร็จ", "success");
         router.push("/main");
       }
@@ -114,10 +115,6 @@ export const useLogin = () => {
       console.error("Error fetching user profile:", error);
     }
   };
-
-  useEffect(() => {
-    getProfileUser();
-  }, []);
 
 
   return {

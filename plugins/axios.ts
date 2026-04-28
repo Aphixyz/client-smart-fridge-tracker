@@ -18,12 +18,12 @@ const handleError = (error: any) => {
     const requestUrl = error.config?.url || "";
 
     const isAuthRequest =
-      requestUrl.includes("/auth/login") ||
+      requestUrl.includes("/") ||
       requestUrl.includes("/auth/register");
 
     if (status === 401 && !isAuthRequest && typeof window !== "undefined") {
       AuthToken.clear();
-      window.location.href = "/auth/login";
+      window.location.href = "/";
     }
   }
 

@@ -69,7 +69,7 @@ export const useRegister = () => {
       setData(response);
       setForm(initialForm);
       showToast("สมัครสมาชิกสำเร็จ", "success");
-      router.push("/auth/login");
+      router.push("/");
     } catch (err) {
       let message = "เกิดข้อผิดพลาดจากเครือข่าย";
 

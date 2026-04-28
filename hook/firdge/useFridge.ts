@@ -17,24 +17,24 @@ export const useFridge = () => {
 
   const handleAddFridge = async () => {
     if (!formData.name || !formData.location) {
-        showToast("กรุณากรอกข้อมูลให้ครบถ้วน", "error");
-        return false;
+      showToast("กรุณากรอกข้อมูลให้ครบถ้วน", "error");
+      return false;
     }
 
     setIsSubmitting(true)
     try {
-      await fridgeService.createFridge({ 
-          name: formData.name, 
-          location: formData.location 
+      await fridgeService.createFridge({
+        name: formData.name,
+        location: formData.location
       });
 
       showToast("เพิ่มตู้เย็นใหม่เรียบร้อยแล้ว", "success")
       setFormData(initialForm);
-      await fetchFridges(); 
-      return true; 
+      await fetchFridges();
+      return true;
     } catch (error) {
       showToast("ไม่สามารถเพิ่มตู้เย็นได้", "error")
-      return false; 
+      return false;
     } finally {
       setIsSubmitting(false)
     }
@@ -55,7 +55,7 @@ export const useFridge = () => {
   useEffect(() => {
     fetchFridges();
   }, [fetchFridges]);
-  
+
   return {
     fridges,
     loading,
