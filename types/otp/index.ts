@@ -1,10 +1,14 @@
 export interface OtpRequest {
-    email: string,
+    username: string,
     purpose: string
 }
 
-export interface VerifyOtp {
-    email: string,
+export interface VerifyOtp extends OtpRequest {
     otp: string,
-    purpose: string
+}
+
+export interface ResetPasswordRequest {
+    username: string,
+    newPassword: string,
+    confirmPassword: string
 }

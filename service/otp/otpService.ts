@@ -10,6 +10,6 @@ export const otpService = {
     verifyOtp: async (data: VerifyOtp) => {
         const response = await apiClient.post('/otp/verify', data)
         return response.data
-    }
+    },
 
-}
+}   

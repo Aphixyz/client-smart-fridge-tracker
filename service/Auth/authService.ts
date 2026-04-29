@@ -1,6 +1,7 @@
 import apiClient from "@/plugins/axios";
 import { AuthToken } from "@/plugins/auth";
 import { UserProfileResponse } from "@/types/user/response";
+import { ResetPasswordRequest } from "@/types/otp";
 
 export type LoginFormData = {
   username: string;
@@ -38,6 +39,11 @@ export const AuthService = {
     } finally {
       AuthToken.clear();
     }
+  },
+
+  resetPassword: async (data: ResetPasswordRequest) => {
+    const response = await apiClient.put('/auth/reset-password', data)
+    return response.data
   },
 
   getLocalUser: (): AuthUser | null => {
